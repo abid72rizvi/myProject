@@ -1,6 +1,14 @@
-import react from 'react';
-import ReactDom from 'react-dom';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './App';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
-ReactDom.render(
-  <h1>asds</h1>, document.getElementById('abc')
-)
+injectTapEventPlugin();
+
+ReactDOM.render(
+  <MuiThemeProvider>
+  <App />
+  </MuiThemeProvider>,
+  document.getElementById('root')
+);
