@@ -5,17 +5,19 @@ import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import MdArrowForward from 'react-icons/lib/md/arrow-forward';
 import App1 from './drawer.js';
 import axios from 'axios';
 
 const style = {
-  margin: 20,
+  width:500,
+  margin: 80,
   textAlign: 'center',
 };
 
 const chipStyl = {
   chip: {
-    margin: 4,
+    margin:4,
   },
   wrapper: {
     display: 'flex',
@@ -41,6 +43,13 @@ handleRequestDelete(i) {
   arr.splice(i,1);
   this.setState({chipContent:arr});
 }
+
+handleEnter(event){
+  if(event.charCode == 13){
+            this.onClickGo();
+         }
+}
+
  handleTouchTap() {
   alert('You clicked the Chip.');
 }
@@ -59,7 +68,7 @@ handleRequestDelete(i) {
 
 var that=this;
     var count=0;
-    axios.get("http://172.23.238.153:4425/Workflows")
+    axios.get("http://localhost:3003/Workflows")
       .then(function(result){
     //  console.log(result.data);
       //console.log("the value of textbox  "+ that.state.value);
@@ -81,7 +90,7 @@ var that=this;
 
         })
       })
-      if(count==0)
+      if(count==0)https://github.com/abid72rizvi/myProject
       {
         alert("Sorry no workflow found");
       }
@@ -145,13 +154,17 @@ handleChange(evt)
             />
             <App1 open={this.state.open} handleToggle={this.handleToggle.bind(this)}/>
 
+            <div style={{display: 'flex', justifyContent: 'center'}}>
               <Paper style={style} zDepth={2}>
               <TextField
                     hintText="Search here" value={this.state.value}
-                    floatingLabelText="Floating Label Text"  onChange={this.handleChange.bind(this)}/><br/>
-                    {items}
-              <RaisedButton   label="Go" primary={true} onClick={this.onClickGo.bind(this)} />
+                    floatingLabelText="Workflow type"  onChange={this.handleChange.bind(this)} onKeyPress={this.handleEnter.bind(this)}/>
+                    <MdArrowForward onClick={this.onClickGo.bind(this)} />
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                      {items}
+                    </div>
               </Paper>
+            </div>
 
       </div>
     );
